@@ -1,6 +1,7 @@
 //package com.galvanize;
 //import Cardsbutrenamedforlessconfusion.*;
 
+
 public class Application {
     public static void main(String[] args){
         System.out.println("fuuuuuuuuuuuuuuuuuuuuuuuuuck java");
@@ -22,6 +23,13 @@ public class Application {
         System.out.println(d.dealcard());
         System.out.println(d.spilldeck());
         //System.out.println(""+(0+d.dealcard()+d.dealcard()));
+
+
+        String status = "active";
+        if(status == "active")
+        {
+            System.out.println("True");
+        }
     }
 
 }
