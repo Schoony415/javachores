@@ -8,7 +8,7 @@ public class Application {
         //for loop test
         int bignum =10;
         for (int counter =0; counter < bignum; counter++) {
-            System.out.print(counter);
+            print(""+counter);//using my print command
         }
         System.out.println("#count from 0");
         //line added for version control
@@ -24,12 +24,25 @@ public class Application {
         System.out.println(d.spilldeck());
         //System.out.println(""+(0+d.dealcard()+d.dealcard()));
 
-
-        String status = "active";
-        if(status == "active")
-        {
-            System.out.println("True");
+        //playing with the die
+        pln("playing with the die");
+        Die six = new Die(6);
+        pln(""+six.roll());
+        Die ten = new Die(20);
+        pln("twenty sided");
+        for(int i = 0; i < 20; i++){
+            print(","+ten.roll());
         }
+        pln("");
+
+
+
+
+
+
     }
 
+    //i'm getting lazy and these can't just be imported with a shorter name
+    public static void pln(String arg){System.out.println(arg);}
+    public static void print(String arg){System.out.print(arg);}
 }
