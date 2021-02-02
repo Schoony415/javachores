@@ -104,6 +104,7 @@ public class Deck{
     }
     public String spilldeck(){
         String tempstring = "";
+        //foreach:
         for (Card tcard : cards){
                 tempstring += tcard;
         }
