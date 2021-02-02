@@ -2,12 +2,14 @@ import java.util.Random;
 public class Deck{
         private int decksize;//to help keep track
         private Card[] cards;
+        private Random rand;
 
         //constructor
         public Deck(){
-            System.out.println(); System.out.print("deck initilized, this at in constructor");
+            //System.out.println(); System.out.print("deck initilized, this at in constructor");
             this.decksize = 0;
             this.cards = new Card[52];
+            rand = new Random();
 
             //making cards
             int tempvalue=0;
@@ -79,13 +81,13 @@ public class Deck{
                     this.cards[this.decksize] = tempcard;//using decksize because 0 base
                     this.decksize++;
                     //addcard(tempcard);
-                    System.out.print(this.decksize+",");
+                    //System.out.print(this.decksize+",");
                 }
                 //this resets values after the king
                 if(tempvalue==13){tempvalue=0;tempsuite++;}
             }//end of for loop
 
-        System.out.println("finished constructor");
+        //System.out.println("finished constructor");
         }//end of constructor
 /*
     //addcard //not working for me
@@ -99,7 +101,6 @@ public class Deck{
         return cards[arg];
     }
     public Card dealcard(){
-        Random rand = new Random();
         return cards[rand.nextInt(decksize-1)];
     }
     public String spilldeck(){

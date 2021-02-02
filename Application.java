@@ -4,6 +4,8 @@
 
 public class Application {
     public static void main(String[] args){
+        System.out.println(args);
+
         System.out.println("fuuuuuuuuuuuuuuuuuuuuuuuuuck java");
         //for loop test
         int bignum =10;
@@ -19,9 +21,12 @@ public class Application {
         Program.MyMethod();
         Deck d = new Deck();
         System.out.println(""+d);
+        print("Specific cards:");
         System.out.println(""+d.pickcard(15)+d.pickcard(34)+d.pickcard(48)+d.pickcard(5));
-        System.out.println(d.dealcard());
-        System.out.println(d.spilldeck());
+        print("Random cards:");
+        System.out.print(d.dealcard());
+        print(""+d.dealcard());print(""+d.dealcard());print(""+d.dealcard());print(""+d.dealcard());pln("");
+        //System.out.println(d.spilldeck()); //all the cards
         //System.out.println(""+(0+d.dealcard()+d.dealcard()));
 
         //playing with the die
@@ -40,9 +45,9 @@ public class Application {
 
 
 
-    }
+    }//end of main
 
     //i'm getting lazy and these can't just be imported with a shorter name
     public static void pln(String arg){System.out.println(arg);}
     public static void print(String arg){System.out.print(arg);}
-}
+}//end of file
