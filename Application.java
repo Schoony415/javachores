@@ -13,5 +13,8 @@ public class Application {
         //where is this bitch located in the files!
         //found them lovely jubly
 
+        //calling another file's static method
+        Program.MyMethod();
+
     }
 }
