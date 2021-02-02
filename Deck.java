@@ -1,18 +1,18 @@
 import java.util.Random;
 public class Deck{
-        private int decksize;
+        private int decksize;//to help keep track
         private Card[] cards;
 
         //constructor
         public Deck(){
-            System.out.println("deck initilized, this at in constructor");
+            System.out.println(); System.out.print("deck initilized, this at in constructor");
             this.decksize = 0;
             this.cards = new Card[52];
 
             //making cards
             int tempvalue=0;
             int tempsuite=1;
-
+            //<=52 because we start by adding 1
             for(int i=1;i<=52;i++) {
                 tempvalue++;
                 if (tempvalue <= 13) {
@@ -76,25 +76,24 @@ public class Deck{
                             tempcard.Face = "Joker";
                             break;
                     }
-                    this.cards[this.decksize] = tempcard;
+                    this.cards[this.decksize] = tempcard;//using decksize because 0 base
                     this.decksize++;
                     //addcard(tempcard);
                     System.out.print(this.decksize+",");
                 }
+                //this resets values after the king
                 if(tempvalue==13){tempvalue=0;tempsuite++;}
-
             }//end of for loop
-
 
         System.out.println("finished constructor");
         }//end of constructor
 /*
-        //addcard
-        public void addcard(card togive){
-            this.cards[this.decksize] = togive;
-            this.decksize++;
-            //return this.decksize;
-        }
+    //addcard //not working for me
+    public void addcard(Card togive){
+        this.cards[] += [togive];
+        this.decksize++;
+        //return this.decksize;
+    }
 */
     public Card pickcard(int arg){
         return cards[arg];
@@ -106,60 +105,13 @@ public class Deck{
     public String spilldeck(){
         String tempstring = "";
         for (Card tcard : cards){
-                tempstring+= tcard;
+                tempstring += tcard;
         }
         return tempstring;
     }
+    //string overwrite
+    public String toString(){
+        return ("Deck of "+decksize);
+    }
 
 }
-
-    //-------------
-
-    //-------------
-
-/*    public static void main(String[] args){
-        Deck thisolddeck = createdeck();
-
-    }
-
-*/
-    /*
-    public static Deck createdeck(){
-        Deck TempDeck = new Deck();
-
-        int tempvalue=0;
-        int tempsuite=1;
-
-        for(int i=1;i<=52;i++){
-            tempvalue++;
-            if (tempvalue <=13){
-                card tempcard = new card();
-                tempcard.face=tempvalue;
-                switch (tempsuite){
-                    case 1:
-                        tempcard.Suite="Hearts";
-                        break;
-                    case 2:
-                        tempcard.Suite="Club";
-                        break;
-                    case 3:
-                        tempcard.Suite="Spade";
-                        break;
-                    case 4:
-                        tempcard.Suite="Diamond";
-                        break;
-                }
-            System.out.println(TempDeck.addcard(tempcard));
-
-
-
-
-            }
-
-        }
-
-    }
-
-     */
-
-
