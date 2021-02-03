@@ -29,6 +29,12 @@ public class Application {
         //System.out.println(d.spilldeck()); //all the cards
         //System.out.println(""+(0+d.dealcard()+d.dealcard()));
 
+        pln("-------");
+        d.addcard(new Card("joker","club",0));
+        pln(""+d.pickcard(53));
+        System.out.println(d.spilldeck()); //all the cards
+
+
         //playing with the die
         pln("playing with the die");
         Die six = new Die(6);
@@ -40,6 +46,7 @@ public class Application {
         }
         pln("");
 
+        //for(int i =2; i<=6; i+=2){print(""+i);}pln("");
 
 
 

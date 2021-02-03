@@ -8,6 +8,11 @@ public class Card {
         this.Suite = "";
         this.Value = 0;
     }
+    public  Card(String tface, String tSuite, int tvalue){
+        this.Face = tface;
+        this.Suite = tSuite;
+        this.Value = tvalue;
+    }
     //output methods
     public String getFace(){
         return Face;

@@ -89,16 +89,22 @@ public class Deck{
 
         //System.out.println("finished constructor");
         }//end of constructor
-/*
+
     //addcard //not working for me
     public void addcard(Card togive){
-        this.cards[] += [togive];
+        Card[] temparry = new Card[decksize+1];
+        for(int i= 0; i< (decksize); i++){
+            temparry[i] = cards[i];
+        }
+        temparry[decksize]=togive;
         this.decksize++;
+        this.cards = new Card[decksize];
+        this.cards = temparry;
         //return this.decksize;
     }
-*/
+
     public Card pickcard(int arg){
-        return cards[arg];
+        return cards[arg-1];
     }
     public Card dealcard(){
         return cards[rand.nextInt(decksize-1)];
