@@ -36,8 +36,13 @@ public class Piece {
                 this.moveType = "L";
                 break;
         }
-
-
+    }
+    //this is for when I want to just letter the board places
+    public Piece(String arg){
+        this.pColor = "";
+        this.pType = arg;
+        this.moveType = "";
+        this.pieceHasMoved = false;
     }
 
     public boolean validMove(int row, int column){
@@ -48,6 +53,7 @@ public class Piece {
 
     public String toString() {
         if (pType.isEmpty()) return "[  ]";
+        if (pColor.isEmpty()) return  ("[" + pType + "]");
         if(pType=="Knight") return ("[" + "N" + "" + pColor.substring(0, 1) + "]");
         return ("[" + pType.substring(0, 1) + "" + pColor.substring(0, 1) + "]");
     }

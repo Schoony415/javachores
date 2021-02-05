@@ -24,13 +24,14 @@ public class Application {
 
         //for(int i =2; i<=6; i+=2){print(""+i);}pln("");
 
-        testDeck();
-        testDice();
-        testChess();
+        //testDeck();
+        //testDice();
+        //testChess();
         playChess();
 
         //-----------------------
-
+        //Board locations = new Board(false);
+        //pln(""+locations);
 
 
 
@@ -220,18 +221,23 @@ public class Application {
         */
 
         //-------------
+        Board locations = new Board(false);
+        //pln(""+locations);
         Board playtest = new Board(true);
+        pln(playtest+"");
         String input = "";
         while(true){
-            pln(playtest+"");
             pln("Your move: ");
             input = in.nextLine();
             if(input.toLowerCase().contains("q")){pln("exit");break;}
-            if(input.length()<4){pln("idiot");break;}
-            if(input.toLowerCase().contains("quite")){pln("exit");break;}
+            if(input.toLowerCase().contains("quit")){pln("exit");break;}
             if(input.toLowerCase().contains("exit")){pln("exit");break;}
+            if(input.toLowerCase().contains("help")){pln("q,quit,exit,help,location,piece destination");}else
+            if(input.length()<5){pln("idiot");break;}
+            if(input.toLowerCase().contains("location")){pln(""+locations);}else{
             //pln(input);
             playtest.movePiece(input.substring(0,2),input.substring(input.length()-2));
+            pln(playtest+"");}
             //break;
         }
 

@@ -27,6 +27,12 @@ public class Board {
             this.masterBoard[7][6] = new Piece("Knight", w);
             this.masterBoard[7][7] = new Piece("Rook", w);
             for(int i = 0;i<8;i++) this.masterBoard[6][i] = new Piece("Pawn", w);
+        }else{
+            //creates a reference board
+            String[] letters = {"a","b","c","d","e","f","g","h"};
+            int[] numbers = {8,7,6,5,4,3,2,1};
+            for(int c = 0;c<8;c++) for(int r = 0;r<8;r++) this.masterBoard[c][r] = new Piece(""+letters[r]+numbers[c]);
+
         }
     }
 
