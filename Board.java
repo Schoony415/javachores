@@ -165,7 +165,8 @@ public class Board {
                 break;
             case "S": //Straight
                 //System.out.println("--checking straight case");
-                if(0==(irow-frow) || 0==(icolumn-fcolumn) ){ //nor statement to make sure only on direction
+                if(0==(irow-frow)
+                        || 0==(icolumn-fcolumn) ){ //nor statement to make sure only on direction
                     System.out.println("--Stright true");
                     validmove = true; //not checking for pieces in the way!!
                 }
@@ -176,13 +177,16 @@ public class Board {
                 //System.out.println("row:"+irow+",col:"+icolumn+";row:"+frow+",col:"+fcolumn);
                 //System.out.println("Piece at "+irow+","+icolumn+" is "+masterBoard[irow][icolumn]+" and is "+masterBoard[irow][icolumn].pawnHasMoved);
                 //if column doesn't change but row does by 1
-                if(1==Math.abs(irow-frow) && 0==(icolumn-fcolumn)) {
+                if(1==Math.abs(irow-frow)
+                        && 0==(icolumn-fcolumn)) {
                     //masterBoard[irow][icolumn].pawnHasMoved = true;
                     System.out.println("--pawn move 1");
                     validmove=true;
                 }else
                 //if column doesn't change but row does by 2 on initial pawn move
-                if(!masterBoard[irow][icolumn].pieceHasMoved && 2==Math.abs(irow-frow) && 0==icolumn-fcolumn){
+                if(!masterBoard[irow][icolumn].pieceHasMoved
+                        && 2==Math.abs(irow-frow)
+                        && 0==icolumn-fcolumn){
                     //masterBoard[irow][icolumn].pawnHasMoved = true;
                     System.out.println("--pawn move 2");
                     validmove=true;
@@ -219,7 +223,8 @@ public class Board {
             case "L": //Knight
                 //L shapes
                 //System.out.println("--inside the knight case");
-                if((2==Math.abs(irow-frow) && 1==Math.abs(icolumn-fcolumn) )||((1==Math.abs(irow-frow) && 2==Math.abs(icolumn-fcolumn) ))){
+                if((2==Math.abs(irow-frow) && 1==Math.abs(icolumn-fcolumn) )
+                        ||((1==Math.abs(irow-frow) && 2==Math.abs(icolumn-fcolumn) ))){
                     //so I checked that you did a two by one diag
                     System.out.println("--knight move true");
                     validmove=true;

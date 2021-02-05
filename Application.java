@@ -1,6 +1,7 @@
 //package com.galvanize;
 //import Cardsbutrenamedforlessconfusion.*;
-
+// Java program to demonstrate working of Scanner in Java
+import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args){
@@ -20,33 +21,26 @@ public class Application {
         //calling another file's static method
         Program.MyMethod();
 
-        Deck d = new Deck();
-        System.out.println(""+d);
-        print("Specific cards:");
-        System.out.println(""+d.pickcard(15)+d.pickcard(34)+d.pickcard(48)+d.pickcard(5));
-        print("Random cards:");
-        System.out.print(d.dealcard());
-        print(""+d.dealcard());print(""+d.dealcard());print(""+d.dealcard());print(""+d.dealcard());pln("");
-        //System.out.println(d.spilldeck()); //all the cards
-        //System.out.println(""+(0+d.dealcard()+d.dealcard()));
-
-        pln("-------");
-        d.addcard(new Card("joker","club",0));
-        pln(""+d.pickcard(53));
-        System.out.println(d.spilldeck()); //all the cards
-
-        //playing with the die
-        pln("playing with the die");
-        Die six = new Die(6);
-        pln(""+six.roll());
-        Die ten = new Die(20);
-        pln("twenty sided");
-        for(int i = 0; i < 20; i++){
-            print(","+ten.roll());
-        }
-        pln("");
 
         //for(int i =2; i<=6; i+=2){print(""+i);}pln("");
+
+        testDeck();
+        testDice();
+        testChess();
+        playChess();
+
+        //-----------------------
+
+
+
+
+
+    }//end of main
+
+    //i'm getting lazy and these can't just be imported with a shorter name
+    public static void pln(String arg){System.out.println(arg);}
+    public static void print(String arg){System.out.print(arg);}
+    public static void testChess(){
 
         pln("----Working on chess board----");
         Board chessboard = new Board(true);
@@ -178,15 +172,70 @@ public class Application {
         chessboard.movePiece("E1","A1",true);
         pln(""+chessboard);*/
 
+    }
+    public static void testDeck(){
+
+        Deck d = new Deck();
+        System.out.println(""+d);
+        print("Specific cards:");
+        System.out.println(""+d.pickcard(15)+d.pickcard(34)+d.pickcard(48)+d.pickcard(5));
+        print("Random cards:");
+        System.out.print(d.dealcard());
+        print(""+d.dealcard());print(""+d.dealcard());print(""+d.dealcard());print(""+d.dealcard());pln("");
+        //System.out.println(d.spilldeck()); //all the cards
+        //System.out.println(""+(0+d.dealcard()+d.dealcard()));
+
+        pln("-------");
+        d.addcard(new Card("joker","club",0));
+        pln(""+d.pickcard(53));
+        System.out.println(d.spilldeck()); //all the cards
+
+    }
+    public static void testDice(){
+
+        //playing with the die
+        pln("playing with the die");
+        Die six = new Die(6);
+        pln(""+six.roll());
+        Die ten = new Die(20);
+        pln("twenty sided");
+        for(int i = 0; i < 20; i++){
+            print(","+ten.roll());
+        }
+        pln("");
+    }
+    public static void playChess(){
+
+        // Using Scanner for Getting Input from User
+        Scanner in = new Scanner(System.in);
+        /*
+        String s = in.nextLine();
+        System.out.println("You entered string "+s);
+
+        int a = in.nextInt();
+        System.out.println("You entered integer "+a);
+
+        float b = in.nextFloat();
+        System.out.println("You entered float "+b);
+        */
+
+        //-------------
+        Board playtest = new Board(true);
+        String input = "";
+        while(true){
+            pln(playtest+"");
+            pln("Your move: ");
+            input = in.nextLine();
+            if(input.toLowerCase().contains("q")){pln("exit");break;}
+            if(input.length()<4){pln("idiot");break;}
+            if(input.toLowerCase().contains("quite")){pln("exit");break;}
+            if(input.toLowerCase().contains("exit")){pln("exit");break;}
+            //pln(input);
+            playtest.movePiece(input.substring(0,2),input.substring(input.length()-2));
+            //break;
+        }
 
 
 
-
-
-
-    }//end of main
-
-    //i'm getting lazy and these can't just be imported with a shorter name
-    public static void pln(String arg){System.out.println(arg);}
-    public static void print(String arg){System.out.print(arg);}
+    }
 }//end of file
