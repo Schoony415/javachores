@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class PokerHand implements Comparable<Object>{
+
     Card[] Hand;//public for testing
     private int HandType;
     //private int pairprimary;//might make array
@@ -327,6 +328,18 @@ public class PokerHand implements Comparable<Object>{
         }
         //System.out.print(output+",");
         return output;
+    }
+    public enum Result { TIE, WIN, LOSS }
+
+    public Result compareWith(PokerHand hand) {
+        int comp = this.compareTo(hand);
+        if(comp>0){
+            return Result.WIN;
+        }
+        if(comp<0){
+            return Result.LOSS;
+        }
+        return Result.TIE;
     }
     public boolean equals(Object o){
         PokerHand other = (PokerHand) o;
