@@ -104,10 +104,25 @@ public class Deck{
     }
 
     public Card pickcard(int arg){
+        cards[arg-1].dealt=true;
         return cards[arg-1];
     }
     public Card dealcard(){
-        return cards[rand.nextInt(decksize-1)];
+        boolean cont = false;
+        for (Card tcard : cards){
+            if(tcard.dealt == false){
+                cont=true; break;
+            }
+        }
+
+        while(cont){
+            int tempnum= rand.nextInt(decksize);
+            if(cards[tempnum].dealt == false){
+                cards[tempnum].dealt=true;
+                return cards[tempnum];
+            }
+        }
+        return null;
     }
     public String spilldeck(){
         String tempstring = "";
@@ -116,6 +131,16 @@ public class Deck{
                 tempstring += tcard;
         }
         return tempstring;
+    }
+    public String status(){
+            int dealt = 0;
+            for(Card c : cards)
+                if(c.dealt==true){dealt++;}
+            return ("Deck of "+decksize+" / "+dealt+" dealt");
+    }
+    public void shuffle(){
+        for(Card c : cards)
+            if(c.dealt==true){c.dealt=false;}
     }
     //string overwrite
     public String toString(){
