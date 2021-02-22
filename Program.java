@@ -309,7 +309,76 @@ import java.util.Collections;
         private boolean on;
     }
 
+
+    //-----from java test----------------------------------------------------------
+    // Make sure you read the instructions above carefully.
+    public void printEachElement(int[] arr) {
+
+        // Your Code Here
+        // System.out.println();
+        for(int i = 0; i < arr.length;i++)
+            System.out.println(arr[i]);
+    }
+    public void printEachElement() {
+
+        String[][] rowsOfletters = {
+                {"A", "B", "C"},
+                {"D", "E", "F"},
+                {"G", "H", "I"},
+                {"J", "K"},
+                {"L"},
+        };
+
+        // Your Code Here
+        // System.out.println();
+        for(int r = 0; r<rowsOfletters.length;r++)
+            for(int c = 0; c<rowsOfletters[r].length;c++)
+                System.out.println(rowsOfletters[r][c]);
+    }
+
+    // Make sure you read the instructions above carefully.
+    public static HashMap<String, Integer> characterCount(String letters){
+        HashMap<String, Integer> myhash = new HashMap<>();
+        for(String l : letters.split("")){
+            if(myhash.containsKey(l)){
+                myhash.put(l,myhash.get(l)+1);
+            }else{
+                myhash.put(l,1);
+            }
+        }
+        return myhash;
+    }
+
+
+
+
+
 }//end file
+
+/*Create a new class called Book with default access.
+ It should have 2 fields, String title and String author that are
+  updated when a new instance of Book is created. Book should
+  also have a class method called contents that is only accessible
+   within the Book class itself - the contents method should return
+    the String "Hello Reader!".
+
+Please ignore the tests results, your answer will be manually graded
+
+Try to answer as best as you can, the closer to the solution you can get,
+the more points you will receive
+ */
+class Book{
+    String title;
+    String author;
+    public Book(String newTitle, String newAuthor){
+        this.title=newTitle;
+        this.author=newAuthor;
+    }
+    private String contents(){
+        return "Hello Reader!";
+    }
+}
+
 
 class Product {
     Product(String name, int valueInCents) {
@@ -346,4 +415,5 @@ class Product {
     public Currency getCurrency(){
         return new Currency(valueInCents);
     }
-}
+
+}//end of file

@@ -19,12 +19,17 @@ public class Application {
         //testChess();
         //playChess();
         //PokerHandTests.pokerHandSortTest();
-
         //-----------------------
         //Board locations = new Board(false);
         //pln(""+locations);
+        //pln(""+Program.characterCount("Hello World"));
+
+
+
+
         pln("--finished main--");
     }//end of main
+
     public static void initialTests(String[] args){
 
         System.out.println(args);
