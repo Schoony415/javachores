@@ -1,6 +1,7 @@
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 //import java.*;
 
 
@@ -270,7 +271,7 @@ import java.util.Collections;
                             break;
                         }
                 } }
-            if(finalout.isEmpty()){
+            if(!finalout.isEmpty()&&(finalout.get(0).isEmpty())){
                 //finalout=new ArrayList<>(Arrays.asList());
                 return new ArrayList<>();
             }
@@ -307,6 +308,382 @@ import java.util.Collections;
         private LocalDateTime visitedAt;
         private HashMap<String, Integer> visitCount;
         private boolean on;
+    }
+
+
+    //codewars ----------------- nextbigger number-------------------------
+    public static long nextBiggerNumber(long n)
+    {
+        if(n<10){
+            return -1;
+        }
+
+        String orign = String.valueOf( n);
+        List<Character> intarry = new ArrayList<>();
+        for(char cha:orign.toCharArray())
+            intarry.add(cha);
+
+        List<String> answers = new ArrayList<>();
+        rec(new ArrayList<>(), intarry, answers);
+
+        System.out.println("--"+answers.size());//+"--"+factorial(orign.length()));
+        //for(String str : answers)
+        //    System.out.println(str);
+        //System.out.println("--");
+
+        List<Long> numlist = new ArrayList<>();
+        for(String str : answers){
+            numlist.add(Long.parseLong(str));
+        }
+        //this is removing duplicates
+        //numlist = numlist.stream().distinct().collect(Collectors.toList());
+        numlist = new ArrayList<>(new HashSet<>(numlist));
+        //sort this bad boy
+        Collections.sort(numlist);
+
+        System.out.println("--"+numlist.size()+"--");
+        //for(Long lnm : numlist)
+        //    System.out.println(lnm);
+        //System.out.println("--");
+        try {
+            int place = numlist.indexOf(n);
+            if (numlist.get(place + 1) != n) {
+                return numlist.get(place + 1);
+            }
+        }catch(IndexOutOfBoundsException e){
+            return -1;
+        }
+        return -1;
+
+        //return n;
+    }
+    public static void rec(List<Character> leads, List<Character> left, List<String> finals){
+        if(left.size()==2){
+            String tempstr = "";
+            for(char cha : leads){
+                tempstr= tempstr.concat(Character.toString(cha));
+            }
+            if(!finals.isEmpty()){
+                if(!finals.contains(tempstr+left.get(0)+left.get(1)))
+                    finals.add(tempstr+left.get(0)+left.get(1));
+                if(!finals.contains(tempstr+left.get(1)+left.get(0)))
+                    finals.add(tempstr+left.get(1)+left.get(0));}else{
+                finals.add(tempstr+left.get(0)+left.get(1));
+                finals.add(tempstr+left.get(1)+left.get(0));
+            }
+            //System.out.println((tempstr+left.get(0)+left.get(1))+" , "+(tempstr+left.get(1)+left.get(0)));
+        }else{
+            for(int i = 0; i < left.size();i++){
+                List<Character> templeads = new ArrayList<>();
+                deepCopy(leads, templeads);
+                List<Character> templeft = new ArrayList<>();
+                deepCopy(left, templeft);
+                templeads.add(templeft.get(i));
+                templeft.remove(i);
+                rec(templeads,templeft ,finals);
+            }
+        }
+    }
+    public static void deepCopy(List<Character> original, List<Character> intended){
+        for(char cha : original){
+            intended.add(cha);
+        }
+    }
+    public static long factorial(int n) {
+        long fact = 1;
+        for (int i = 2; i <= n; i++) {
+            fact = fact * i;
+        }
+        return fact;
+    }
+    //---with arrays----------------------------------------
+    public static long nextBiggerNumberArray(long n)
+    {
+        if(n<10){
+            return -1;
+        }
+
+        String orign = String.valueOf( n);
+        //char[] intarry = orign.toCharArray();
+
+        long[] answers = new long[(int)factorial(orign.length())];
+        int[] index = new int[]{0};
+        //recArray(new char[0], intarry, answers,index);
+        recArray(new char[0], orign.toCharArray(), answers,index,orign.toCharArray());
+
+        System.out.println("--"+answers.length+" ,i: "+index[0]);//+"--"+factorial(orign.length()));
+
+        Arrays.sort(answers);
+        int newlength = removeDuplicateElements(answers,answers.length);
+        long[] finals = new long[newlength];
+        deepCopyArray(answers, finals);
+
+        System.out.println("--"+newlength+"--"+finals.length);
+
+        try {
+            int place = Arrays.binarySearch(finals, n);
+
+            if (finals[place + 1] != n) {
+                return finals[place + 1];
+            }
+        }catch(IndexOutOfBoundsException e){
+            return -1;
+        }
+        return -1;
+
+        //return n;
+    }
+    public static void recArray(char[] leads, char[] left, long[] finals, int[] index, char[] original) throws NumberFormatException{
+        if(left.length==2){
+//            String tempstr = "";
+//            for(char cha : leads){
+//                tempstr= tempstr.concat(Character.toString(cha));
+//            }
+//            finals[index[0]] = Long.parseLong(tempstr + left[0] + left[1]);
+//            index[0]++;
+//            finals[index[0]] = Long.parseLong(tempstr + left[1] + left[0]);
+//            index[0]++;
+
+
+            int result = 0;
+            for (int i = 0; i < leads.length; i++)
+            {
+                int digit = (int)leads[i] - (int)'0';
+                if ((digit < 0) || (digit > 9)) throw new NumberFormatException();
+                result *= 10;
+                result += digit;
+            }
+            //result= (result*100)+(((int)almostlast-(int)'0')*10)+((int)last-(int)'0');
+            int zero = (int)left[0]-(int)'0';
+            if ((zero < 0) || (zero > 9)) throw new NumberFormatException();
+            int one =  (int)left[1]-(int)'0';
+            if ((one < 0) || (one > 9)) throw new NumberFormatException();
+            finals[index[0]]=(result*100)+(zero*10)+one;
+            index[0]++;
+            finals[index[0]]=(result*100)+(one*10)+zero;
+            index[0]++;
+
+
+        }else{
+            for(int i = 0; i < left.length;i++){
+                char[] templeads = new char[leads.length + 1];
+                deepCopyArray(leads, templeads);
+                templeads[templeads.length - 1] = left[i];
+                char[] templeft = ArrayCopyWithoutIndex(left, i);
+
+
+//                System.out.println("--+");
+//                System.out.println(templeads.length);
+//                System.out.println(original);
+//                System.out.println(String.valueOf(original));
+//                System.out.println(String.valueOf(original).substring(0,templeads.length));
+//                System.out.println((templeads.toString()));
+//                System.out.println(String.valueOf(templeads));
+//                System.out.println(Long.parseLong(String.valueOf(templeads)));
+//                System.out.println((templeads[templeads.length - 1]>=original[templeads.length - 1])+""+String.valueOf(templeads)+","+String.valueOf(original));
+                //System.out.println((Long.parseLong(String.valueOf(templeads))>=Long.parseLong(String.valueOf(original).substring(0,templeads.length)))+","+Long.parseLong(String.valueOf(templeads))+" : "+Long.parseLong(String.valueOf(original).substring(0,templeads.length)));
+                //if(Long.parseLong(String.valueOf(templeads))>=Long.parseLong(String.valueOf(original).substring(0,templeads.length)))
+                //if(templeads[templeads.length - 1]>=original[templeads.length - 1])
+//                System.out.println(original);
+//                System.out.println(templeads.length-1);
+//                System.out.println(Arrays.copyOfRange(original,0,(templeads.length)));
+//                System.out.println(String.valueOf(Arrays.copyOfRange(original,0,templeads.length)));
+//                System.out.println(Long.parseLong(String.valueOf(Arrays.copyOfRange(original,0,templeads.length))));
+                //if(Long.parseLong(String.valueOf(templeads))>=Long.parseLong(String.valueOf(Arrays.copyOfRange(original,0,templeads.length))))
+                if(Arrays.compare(templeads, Arrays.copyOfRange(original,0,templeads.length))>=0)
+                    recArray(templeads,templeft ,finals,index, original);
+            }
+        }
+    }
+//    public static boolean check(long comp, long original){
+//        return original>comp;
+//    }
+    public static int removeDuplicateElements(long arr[], int n){
+        if (n==0 || n==1){
+            return n;
+        }
+        long[] temp = new long[n];
+        int j = 0;
+        for (int i=0; i<n-1; i++){
+            if (arr[i] != arr[i+1]){
+                temp[j++] = arr[i];
+            }
+        }
+        temp[j++] = arr[n-1];
+        // Changing original array
+        for (int i=0; i<j; i++){
+            arr[i] = temp[i];
+        }
+        return j;
+    }
+    public static void deepCopyArray(char[] original, char[] intended){
+        int smallest = 0;
+        if(original.length<intended.length){
+            smallest=original.length;
+        }else{
+            smallest=intended.length;
+        }
+        for(int i = 0; i< smallest;i++){
+            intended[i]=original[i];
+        }
+    }
+    public static void deepCopyArray(long[] original, long[] intended){
+        int smallest = 0;
+        if(original.length<intended.length){
+            smallest=original.length;
+        }else{
+            smallest=intended.length;
+        }
+        for(int i = 0; i< smallest;i++){
+            intended[i]=original[i];
+        }
+    }
+    public static char[] ArrayCopyWithoutIndex(char[] original, int index){
+        char[] temparr = new char[original.length-1];
+        int mod = 0;
+        for(int i=0; i<original.length;i++){
+            if(i==index){
+                mod = -1;
+                continue;
+            }
+            temparr[i+mod] = original[i];
+        }
+        return temparr;
+    }
+    public static long charArrayTolong(char [] data,char almostlast,char last) throws NumberFormatException
+    {
+        int result = 0;
+        for (int i = 0; i < data.length; i++)
+        {
+            int digit = (int)data[i] - (int)'0';
+            if ((digit < 0) || (digit > 9)) throw new NumberFormatException();
+            result *= 10;
+            result += digit;
+        }
+        result= (result*100)+(((int)almostlast-(int)'0')*10)+((int)last-(int)'0');
+        return result;
+    }
+//--------------with manipulations-----------------------------------------
+    public static long nextBiggerNumberManipulation(long n)
+    {
+        if(n<10){
+            return -1;
+        }
+
+        char[] orign = String.valueOf(n).toCharArray();
+        for(int i = orign.length-1; i >=0; i--)
+        {//stepping backwards through my array
+            long[] answers;
+            int[] index = new int[]{0};
+            //calculate variations of the places i to end
+            long variations = factorial(orign.length - i+1);
+            if(variations>2) {
+                answers = new long[(int) variations];
+            }else{
+                answers = new long[2];
+            }
+            if(i>0) {
+                recManip(ArrayCopyBetweenIndex(orign, 0, i -1),
+                        ArrayCopyBetweenIndex(orign, i -1, orign.length),
+                        answers, index, orign);
+            }else{
+                recManip(new char[0],
+                        orign,
+                        answers, index, orign);
+            }
+            //recManip(char[] leads, char[] left, long[] finals, int[] index, char[] original)
+            //recArray(new char[0], orign.toCharArray(), answers,index,orign.toCharArray());
+            //sort variations
+
+            //compare variations to original
+
+            //return a winning variation
+
+            System.out.println("--"+answers.length+" ,i: "+index[0]);//+"--"+factorial(orign.length()));
+
+            Arrays.sort(answers);
+            int newlength = removeDuplicateElements(answers,answers.length);
+            long[] finals = new long[newlength];
+            deepCopyArray(answers, finals);
+
+            System.out.println("--"+newlength+"--"+finals.length);
+
+//            try {
+//                int place = Arrays.binarySearch(finals, n);
+//
+//                if (finals[place + 1] > n) {
+//                    return finals[place + 1];
+//                }
+//            }catch(IndexOutOfBoundsException e){
+//                return -1;
+//            }
+            for(long f : finals){
+                if(f>n){
+                    return f;
+                }
+            }
+
+
+
+        }
+
+
+
+        return -1;
+    }
+    public static void recManip(char[] leads, char[] left, long[] finals, int[] index, char[] original) throws NumberFormatException
+        {
+        if(left.length==2){
+            //when number goes past maxint, this is the perfered method
+//            String tempstr = "";
+//            for(char cha : leads){
+//                tempstr= tempstr.concat(Character.toString(cha));
+//            }
+//            finals[index[0]] = Long.parseLong(tempstr + left[0] + left[1]);
+//            index[0]++;
+//            finals[index[0]] = Long.parseLong(tempstr + left[1] + left[0]);
+//            index[0]++;
+
+            //breaks past max int
+            long result = 0;
+            if(leads.length>0){
+            for (int i = 0; i < leads.length; i++)
+            {
+                int digit = (int)leads[i] - (int)'0';
+                if ((digit < 0) || (digit > 9)) throw new NumberFormatException();
+                result *= 10;
+                result += digit;
+            }}
+            //result= (result*100)+(((int)almostlast-(int)'0')*10)+((int)last-(int)'0');
+            int zero = (int)left[0]-(int)'0';
+            if ((zero < 0) || (zero > 9)) throw new NumberFormatException();
+            int one =  (int)left[1]-(int)'0';
+            if ((one < 0) || (one > 9)) throw new NumberFormatException();
+            finals[index[0]]=(result*100)+(zero*10)+one;
+            index[0]++;
+            finals[index[0]]=(result*100)+(one*10)+zero;
+            index[0]++;
+
+
+        }else{
+            for(int i = 0; i < left.length;i++){
+                char[] templeads = new char[leads.length + 1];
+                deepCopyArray(leads, templeads);
+                templeads[templeads.length - 1] = left[i];
+                char[] templeft = ArrayCopyWithoutIndex(left, i);
+
+                if(Arrays.compare(templeads, Arrays.copyOfRange(original,0,templeads.length))>=0)
+                    recManip(templeads,templeft ,finals,index, original);
+            }
+        }
+    }
+    public static char[] ArrayCopyBetweenIndex(char[] original, int start, int stop){
+        char[] temparr = new char[Math.abs(stop-start)];
+        int mod = 0-start;
+        for(int i=start; i<stop;i++){
+            temparr[i+mod] = original[i];
+        }
+        return temparr;
     }
 
 
@@ -415,5 +792,7 @@ class Product {
     public Currency getCurrency(){
         return new Currency(valueInCents);
     }
+
+
 
 }//end of file

@@ -24,8 +24,31 @@ public class Application {
         //pln(""+locations);
         //pln(""+Program.characterCount("Hello World"));
 
+        //max int              2,147,483,647
+        //max long 9,223,372,036,854,775,807
+        long n = 6854775807l;//1140179656;
+        //long n = 1237696198; //bad case expected:<1237696819> but was:<1237696577>
+        //long n = 1154359022; //bad case
+        //long n = 415;
+        //long n = 59884848459853l; //huge number test
+        pln("f:"+(Program.factorial(Long.toString(n).length())));
+        long startTime = System.nanoTime();
+        System.out.print(n+":");
+        pln(""+n+" next "+Program.nextBiggerNumberManipulation(n));
+
+        long endTime = System.nanoTime();
+        long timeElapsed = endTime - startTime;
+        System.out.println((timeElapsed /1000000)+"ms");
 
 
+         //n = 771;//1140179656;
+         startTime = System.nanoTime();
+        //System.out.print(n+":");
+        pln(""+n+" next "+Program.nextBiggerNumberArray(n));
+
+         endTime = System.nanoTime();
+         timeElapsed = endTime - startTime;
+        System.out.println((timeElapsed /1000000)+"ms");
 
         pln("--finished main--");
     }//end of main
